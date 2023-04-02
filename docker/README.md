@@ -22,7 +22,7 @@
 
 **kill all running containers with**  
 	docker kill $(docker ps -q)  
-**delete all stopped containers with **  
+**delete all stopped containers with**  
 	docker rm $(docker ps -a -q)  
 **delete all images with**  
 	docker rmi $(docker images -q)  
