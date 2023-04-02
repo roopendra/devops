@@ -32,3 +32,15 @@
 	docker exec -i -t /bin/bash – if bash is not available use /bin/sh  
 **bash shell with root if container is running in a different user context**  
 	docker exec -i -t -u root /bin/bash  
+
+## Docker Compose Installation on Ubuntu
+```
+sudo curl -SL "https://github.com/docker/compose/releases/download/v2.3.3/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+sudo chmod +x /usr/local/bin/docker-compose
+docker-compose --version
+```
+
+if you have cloned this repository then go devops/docker/docker_comp1 directory and run below command
+```
+docker-compose up -d
+```
