@@ -130,3 +130,62 @@ deployment.apps "nginx" deleted
 
 ```
 
+## Scaling and Autoscaling ReplicaSets
+
+```
+#Create pod with a label that match ReplicaSets
+~/devops/kubernetes (master)
+$ kubectl apply -f demo-web.yaml
+pod/demo-web created
+
+# Check if pod is running or not
+~/devops/kubernetes (master)
+$ kubectl get pods
+NAME       READY     STATUS    RESTARTS   AGE
+demo-web   1/1       Running   0          18s
+
+# Create ReplicaSets with 4 replicas
+~/devops/kubernetes (master)
+$ kubectl apply -f nginx_replicaset.yaml
+replicaset.apps/web created
+
+# Check the numnber of pods running. 
+# As 1 pod was running so ReplicaSets only created 3 pods
+~/devops/kubernetes (master)
+$ kubectl get pods
+NAME        READY     STATUS    RESTARTS   AGE
+demo-web    1/1       Running   0          71s
+web-6t2ps   1/1       Running   0          13s
+web-jqwmp   1/1       Running   0          13s
+web-n7w22   1/1       Running   0          13s
+
+# Delete demo-web pod
+~/devops/kubernetes (master)
+$ kubectl delete pods demo-web
+pod "demo-web" deleted
+
+# ReplicaSets will automatically create missing pod. 
+~/devops/kubernetes (master)
+$ kubectl get pods
+NAME        READY     STATUS    RESTARTS   AGE
+web-6t2ps   1/1       Running   0          80s
+web-jqwmp   1/1       Running   0          80s
+web-n7w22   1/1       Running   0          80s
+web-qk4zz   1/1       Running   0          12s
+
+#List all ReplicaSets
+~/devops/kubernetes (master)
+$ kubectl get rs
+NAME      DESIRED   CURRENT   READY     AGE
+web       4         4         4         2m49s
+
+# Delete ReplicaSets
+~/devops/kubernetes (master)
+$ kubectl delete rs web
+replicaset.apps "web" deleted
+
+# Validate if pods delete or not
+~/devops/kubernetes (master)
+$ kubectl get pods
+No resources found.
+```
