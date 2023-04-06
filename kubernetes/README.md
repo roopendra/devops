@@ -38,7 +38,15 @@ Volumes can and shared between your Pods. This allows Kubernetes to run stateful
 Secrets are used to inject sensitive data into your cluster such as API keys, certificates, and other kinds of credential. They can be supplied to Pods as environment variables or files mounted into a volume.
 
 ConfigMaps are a similar concept for non-sensitive information. These objects should store any general settings your app requires.
+## Kubernetes Architecture
+![image](https://user-images.githubusercontent.com/1461161/230362379-8efeb88d-9abb-4647-9a53-245de541cbca.png)
+https://kubernetes.io/docs/concepts/overview/components/
+### What are role of master and data nodes in Kubernetes ?
 
+![image](https://user-images.githubusercontent.com/1461161/230360777-1a92f70c-c90d-42eb-bdbb-4b3e08e63388.png)
+
+![image](https://user-images.githubusercontent.com/1461161/230360810-3bd820af-eaf7-4f43-83da-efa2326410c0.png)
+ 
 ## Minikube 
 minikube is local Kubernetes, focusing on making it easy to learn and develop for Kubernetes. All you need is Docker (or similarly compatible) container or a Virtual Machine environment, and Kubernetes is a single command away: minikube start
 
@@ -70,13 +78,55 @@ https://storage.googleapis.com/minikube/releases/latest/minikube-installer.exe
 **For Mac***   If the Homebrew Package Manager is installed:  
 >brew install minikube  
 
-
+## Minikube Common Issues
+1. X Exiting due to PROVIDER_DOCKER_NOT_RUNNING: deadline exceeded running "docker version --format -:": exit status 1  
+*Solution*: Before executing `minikube start` command make sure Docker service is running.  
 
 **Start your cluster**
 ```
 minikube start
 ```
 
-## Minikube Common Issues
-1. X Exiting due to PROVIDER_DOCKER_NOT_RUNNING: deadline exceeded running "docker version --format -:": exit status 1  
-*Solution*: Before executing `minikube start` command make sure Docker service is running.  
+**POD**  
+- Create pod 
+- List pod 
+- Access pod
+- Delete Pod 
+```
+$ kubectl apply -f https://k8s.io/examples/pods/simple-pod.yaml
+pod/nginx created
+
+$ kubectl get pods
+NAME      READY     STATUS              RESTARTS   AGE
+nginx     0/1       ContainerCreating   0          9s
+
+$ winpty kubectl exec -it nginx bash
+root@nginx:/# exit
+exit
+
+$ kubectl delete pod nginx
+pod "nginx" deleted
+```
+
+**Impreative method to create Deployment**
+```
+$ kubectl create deployment nginx --image=nginx
+deployment.apps/nginx created
+
+$ kubectl scale --replicas=2 deployment/nginx
+deployment.apps/nginx scaled
+
+$ kubectl get deployments
+NAME      READY     UP-TO-DATE   AVAILABLE   AGE
+nginx     2/2       2            2           11s
+
+$ kubectl get pods
+NAME                     READY     STATUS    RESTARTS   AGE
+nginx-6799fc88d8-5srtz   1/1       Running   0          11s
+nginx-6799fc88d8-v9q74   1/1       Running   0          16s
+
+$ kubectl delete deployment nginx
+deployment.apps "nginx" deleted
+
+```
+
