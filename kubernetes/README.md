@@ -59,7 +59,7 @@ minikube is local Kubernetes, focusing on making it easy to learn and develop fo
 1Installation
      
  **For Windows:**
- I would recommend to install Doeker Desktop as setup is easy. 
+ I would recommend to install Docker Desktop as setup is easy. 
  https://desktop.docker.com/win/main/amd64/Docker%20Desktop%20Installer.exe
  
  For more details, you can check here: https://docs.docker.com/desktop/install/windows-install/
