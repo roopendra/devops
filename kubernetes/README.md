@@ -218,3 +218,10 @@ https://www.nginx.com/products/nginx-ingress-controller/
 https://kubernetes.io/docs/concepts/services-networking/ingress-controllers/
 
 
+### Useful Links
+https://kubernetes.io/docs/tutorials/kubernetes-basics/update/update-intro/
+https://kubernetes.io/docs/concepts/services-networking/service/
+https://kubernetes.io/docs/tasks/access-application-cluster/ingress-minikube/
+https://minikube.sigs.k8s.io/docs/handbook/accessing/#example-of-loadbalancer
+https://kubernetes.io/docs/concepts/services-networking/ingress/#what-is-ingress
+https://traefik.io/glossary/kubernetes-ingress-and-ingress-controller-101/
