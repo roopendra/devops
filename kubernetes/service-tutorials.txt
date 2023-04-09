@@ -1,0 +1,53 @@
+# Create a minikube cluster 
+minikube start
+
+
+
+################################
+      ClusterIP Service Demo
+################################
+minikube tunnel
+kubectl create deployment hello-minikube1 --image=kicbase/echo-server:1.0
+kubectl expose deployment hello-minikube1 --type=LoadBalancer --port=8080
+kubectl get svc
+http://REPLACE_WITH_EXTERNAL_IP:8080
+
+
+################################
+      NodePort Service Demo
+################################
+
+# Enable the Ingress controller 
+- To enable the NGINX Ingress controller, run the following command:
+minikube addons enable ingress
+
+- Verify that the NGINX Ingress controller is running
+kubectl get pods -n ingress-nginx
+
+# Deploy Hello World App
+kubectl create deployment web --image=gcr.io/google-samples/hello-app:1.0
+
+#Expose the Deployment:
+kubectl expose deployment web --type=NodePort --port=8080
+
+#Verify the Service is created and is available on a node port:
+kubectl get service web
+
+# Visit the Service via NodePort:
+minikube service web --url
+
+# Create an Ingress
+kubectl apply -f https://k8s.io/examples/service/networking/example-ingress.yaml
+kubectl get ingress
+curl --resolve "hello-world.info:80:$( minikube ip )" -i http://hello-world.info
+
+# create another deployment 
+kubectl create deployment web2 --image=gcr.io/google-samples/hello-app:2.0
+kubectl expose deployment web2 --port=8080 --type=NodePort
+
+#edit the existing ingress and add web2 path as well ( I have already updated in example-ingress.yaml)
+kubectl apply -f example-ingress.yaml
+
+# Test your ingress
+curl --resolve "hello-world.info:80:$( minikube ip )" -i http://hello-world.info
+curl --resolve "hello-world.info:80:$( minikube ip )" -i http://hello-world.info/v2
