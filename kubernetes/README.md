@@ -39,7 +39,8 @@ Secrets are used to inject sensitive data into your cluster such as API keys, ce
 
 ConfigMaps are a similar concept for non-sensitive information. These objects should store any general settings your app requires.
 ## Kubernetes Architecture
-![image](https://user-images.githubusercontent.com/1461161/230362379-8efeb88d-9abb-4647-9a53-245de541cbca.png)
+![image](https://user-images.githubusercontent.com/1461161/230776270-189b6c64-658a-4bec-993e-9fbcd650700d.png)
+
 https://kubernetes.io/docs/concepts/overview/components/
 ### What are role of master and data nodes in Kubernetes ?
 
