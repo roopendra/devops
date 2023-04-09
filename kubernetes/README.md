@@ -189,3 +189,25 @@ replicaset.apps "web" deleted
 $ kubectl get pods
 No resources found.
 ```
+
+## What is Ingress? 
+https://kubernetes.io/docs/concepts/services-networking/ingress/#what-is-ingress
+Ingress exposes HTTP and HTTPS routes from outside the cluster to services within the cluster. Traffic routing is controlled by rules defined on the Ingress resource.
+
+Here is a simple example where an Ingress sends all its traffic to one Service:
+
+![image](https://user-images.githubusercontent.com/1461161/230775925-e438889e-499e-4648-a903-919e63a5e922.png)
+
+An Ingress may be configured to give Services externally-reachable URLs, load balance traffic, terminate SSL / TLS, and offer name-based virtual hosting. An Ingress controller is responsible for fulfilling the Ingress, usually with a load balancer, though it may also configure your edge router or additional frontends to help handle the traffic.
+
+An Ingress does not expose arbitrary ports or protocols. Exposing services other than HTTP and HTTPS to the internet typically uses a service of type Service.Type=NodePort or Service.Type=LoadBalancer.
+
+## Ingress Controllers
+In order for the Ingress resource to work, the cluster must have an ingress controller running.
+
+Unlike other types of controllers which run as part of the kube-controller-manager binary, Ingress controllers are not started automatically with a cluster. Use this page to choose the ingress controller implementation that best fits your cluster.
+
+Kubernetes as a project supports and maintains AWS, GCE, and nginx ingress controllers  
+https://www.nginx.com/products/nginx-ingress-controller/
+https://kubernetes.io/docs/concepts/services-networking/ingress-controllers/
+
