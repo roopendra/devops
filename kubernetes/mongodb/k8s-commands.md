@@ -1,3 +1,6 @@
+![image](https://user-images.githubusercontent.com/1461161/230774484-b6097c2c-9e5f-403a-b843-2b7c7fa49a5f.png)
+
+
 ### kubectl apply commands in order
     
     kubectl apply -f mongo-secret.yaml
