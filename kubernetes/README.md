@@ -190,8 +190,13 @@ $ kubectl get pods
 No resources found.
 ```
 
+## What are the types of Kubernetes services?
+[image](https://user-images.githubusercontent.com/1461161/230776043-8e436797-2e2b-466b-9f7c-62775583156c.png)
+
+
+
 ## What is Ingress? 
-https://kubernetes.io/docs/concepts/services-networking/ingress/#what-is-ingress
+https://kubernetes.io/docs/concepts/services-networking/ingress/#what-is-ingress  
 Ingress exposes HTTP and HTTPS routes from outside the cluster to services within the cluster. Traffic routing is controlled by rules defined on the Ingress resource.
 
 Here is a simple example where an Ingress sends all its traffic to one Service:
@@ -210,4 +215,5 @@ Unlike other types of controllers which run as part of the kube-controller-manag
 Kubernetes as a project supports and maintains AWS, GCE, and nginx ingress controllers  
 https://www.nginx.com/products/nginx-ingress-controller/
 https://kubernetes.io/docs/concepts/services-networking/ingress-controllers/
+
 
