@@ -190,10 +190,113 @@ replicaset.apps "web" deleted
 $ kubectl get pods
 No resources found.
 ```
+# Get commands with basic output
+```kubectl get services                          # List all services in the namespace
+kubectl get pods --all-namespaces             # List all pods in all namespaces
+kubectl get pods -o wide                      # List all pods in the current namespace, with more details
+kubectl get deployment my-dep                 # List a particular deployment
+kubectl get pods                              # List all pods in the namespace
+kubectl get pod my-pod -o yaml                # Get a pod's YAML  
 
-## What are the types of Kubernetes services?
-[image](https://user-images.githubusercontent.com/1461161/230776043-8e436797-2e2b-466b-9f7c-62775583156c.png)
+# Describe commands with verbose output
+kubectl describe nodes my-node
+kubectl describe pods my-pod
 
+# List Services Sorted by Name
+kubectl get services --sort-by=.metadata.name
+
+# List pods Sorted by Restart Count
+kubectl get pods --sort-by='.status.containerStatuses[0].restartCount'
+
+# List PersistentVolumes sorted by capacity
+kubectl get pv --sort-by=.spec.capacity.storage
+
+# Get the version label of all pods with label app=cassandra
+kubectl get pods --selector=app=cassandra -o \
+  jsonpath='{.items[*].metadata.labels.version}'
+
+# Retrieve the value of a key with dots, e.g. 'ca.crt'
+kubectl get configmap myconfig \
+  -o jsonpath='{.data.ca\.crt}'
+
+# Get all worker nodes (use a selector to exclude results that have a label
+# named 'node-role.kubernetes.io/master')
+kubectl get node --selector='!node-role.kubernetes.io/master'
+
+# Get all running pods in the namespace
+kubectl get pods --field-selector=status.phase=Running
+
+# Get ExternalIPs of all nodes
+kubectl get nodes -o jsonpath='{.items[*].status.addresses[?(@.type=="ExternalIP")].address}'
+
+# List Names of Pods that belong to Particular RC
+# "jq" command useful for transformations that are too complex for jsonpath, it can be found at https://stedolan.github.io/jq/
+sel=${$(kubectl get rc my-rc --output=json | jq -j '.spec.selector | to_entries | .[] | "\(.key)=\(.value),"')%?}
+echo $(kubectl get pods --selector=$sel --output=jsonpath={.items..metadata.name})
+
+# Show labels for all pods (or any other Kubernetes object that supports labelling)
+kubectl get pods --show-labels
+
+# Check which nodes are ready
+JSONPATH='{range .items[*]}{@.metadata.name}:{range @.status.conditions[*]}{@.type}={@.status};{end}{end}' \
+ && kubectl get nodes -o jsonpath="$JSONPATH" | grep "Ready=True"
+
+# Output decoded secrets without external tools
+kubectl get secret my-secret -o go-template='{{range $k,$v := .data}}{{"### "}}{{$k}}{{"\n"}}{{$v|base64decode}}{{"\n\n"}}{{end}}'
+
+# List all Secrets currently in use by a pod
+kubectl get pods -o json | jq '.items[].spec.containers[].env[]?.valueFrom.secretKeyRef.name' | grep -v null | sort | uniq
+
+# List all containerIDs of initContainer of all pods
+# Helpful when cleaning up stopped containers, while avoiding removal of initContainers.
+kubectl get pods --all-namespaces -o jsonpath='{range .items[*].status.initContainerStatuses[*]}{.containerID}{"\n"}{end}' \
+| cut -d/ -f3
+
+# List Events sorted by timestamp
+kubectl get events --sort-by=.metadata.creationTimestamp
+
+# Compares the current state of the cluster against the state that the cluster would be in if the manifest was applied.
+kubectl diff -f ./my-manifest.yaml
+
+# Produce a period-delimited tree of all keys returned for nodes
+# Helpful when locating a key within a complex nested JSON structure
+kubectl get nodes -o json | jq -c 'path(..)|[.[]|tostring]|join(".")'
+
+# Produce a period-delimited tree of all keys returned for pods, etc
+kubectl get pods -o json | jq -c 'path(..)|[.[]|tostring]|join(".")'
+
+# Produce ENV for all pods, assuming you have a default container for the pods,
+# default namespace and the `env` command is supported.
+# Helpful when running any supported command across all pods, not just `env`
+for pod in $(kubectl get po --output=jsonpath={.items..metadata.name}); do echo $pod && kubectl exec -it $pod env; done
+
+```
+
+### POD Logs Cheat sheet 
+
+1. Print the logs for a pod  
+	```kubectl logs <pod_name>```
+2. Print the logs for the last 6 hours for a pod  
+	```kubectl logs --since=6h <pod_name>```
+3. Get the most recent 50 lines of logs for a pod  
+	```kubectl logs --tail=50 <pod_name>```
+4. Print the logs for a pod and follow new logs  
+	```kubectl logs -f <pod_name>```
+5. Print the logs for a container in a pod  
+	```kubectl logs -c <container_name> <pod_name>```
+6. Output the logs for a pod into a file named 'pod.log'  
+	```kubectl logs <pod_name> > pod.log```
+7. View the logs for a previously failed pod  
+	```kubectl logs --previous <pod_name>```
+8. View the logs for all containers in a pod  
+	```kubectl logs <pod_name> --all-containers```
+
+
+## What are the types of Kubernetes services?  
+• **ClusterIP**: Exposes the Service on a cluster-internal IP. Choosing this value makes the Service only reachable from within the cluster. This is the default that is used if you don't explicitly specify a type for a Service.  
+• **NodePort**: Exposes the Service on each Node's IP at a static port (the NodePort). To make the node port available, Kubernetes sets up a cluster IP address, the same as if you had requested a Service of type: ClusterIP.  
+• **LoadBalancer**: Exposes the Service externally using a cloud provider's load balancer.  
+ExternalName: Maps the Service to the contents of the externalName field (e.g. foo.bar.example.com), by returning a CNAME record with its value. No proxying of any kind is set up.
 
 
 ## What is Ingress? 
@@ -225,3 +328,4 @@ https://kubernetes.io/docs/tasks/access-application-cluster/ingress-minikube/
 https://minikube.sigs.k8s.io/docs/handbook/accessing/#example-of-loadbalancer  
 https://kubernetes.io/docs/concepts/services-networking/ingress/#what-is-ingress  
 https://traefik.io/glossary/kubernetes-ingress-and-ingress-controller-101/  
+https://kubernetes.io/docs/reference/kubectl/cheatsheet/  
