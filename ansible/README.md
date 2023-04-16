@@ -38,12 +38,21 @@ Quick Steps:
 
 ### 1. Get the ansible playbook using git clone
 ```shell
-git clone https://github.com/roopendra/devops.git
-cd devops/ansible
+cd ~ && git clone https://github.com/roopendra/devops.git
+cd ~/devops/ansible
 ```
 
 ### 3. Run the Playbook
 
 ```command
-ansible-playbook -i [inventory file] -u [remote user] playbook.yml
+ansible-playbook -i [inventory file] playbook.yml
 ```
+e.g  
+Deploy Apache on DEV Hosts  
+```ansible-playbook -i ~/devops/ansible/env/dev/hosts.ini playbook.yml```
+
+Deploy Apache on UAT Hosts  
+```ansible-playbook -i ~/devops/ansible/env/uat/hosts.ini playbook.yml```
+
+Deploy Apache on PROD Hosts  
+```ansible-playbook -i ~/devops/ansible/env/prod/hosts.ini playbook.yml```
