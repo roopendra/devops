@@ -66,7 +66,7 @@ output {
 ```
 **Delete Old FileBeat Registry**
 ```
-sudo rm -f /usr/share/filebeat/data/registry
+sudo rm -f /var/lib/filebeat/registry
 
 ```
 
