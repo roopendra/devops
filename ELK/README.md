@@ -1,4 +1,4 @@
-# ELK 7.17 Setup insturctions on Ubuntu and RHEL/CentOS
+# ELK-7.17 setup instructions on Ubuntu and RHEL/CentOS
 -----------------------------------------------------------
 ### Elasticsearch installation on Ubuntu 
 ```
@@ -11,7 +11,7 @@ sudo apt-get update && sudo apt-get install elasticsearch
 #verify installation
 curl localhost:9200 
 ```
-### Logstsh installation on Ubuntu 
+### Logstash installation on Ubuntu 
 ```
 wget -qO - https://artifacts.elastic.co/GPG-KEY-elasticsearch | sudo apt-key add -
 sudo apt-get install apt-transport-https
