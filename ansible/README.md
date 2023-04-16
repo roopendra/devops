@@ -32,27 +32,40 @@ http_port: "80"
 disable_default: true
 ```
 
-## Running this Playbook
+## Ansible Playbook Demo
 
-Quick Steps:
+
 
 ### 1. Get the ansible playbook using git clone
 ```shell
 cd ~ && git clone https://github.com/roopendra/devops.git
-cd ~/devops/ansible
+cd ~/devops/ansible/demo_without_role
 ```
 
 ### 2. Run the Playbook
 
 ```command
-ansible-playbook -i [inventory file] playbook.yml
+ansible-playbook -i [inventory file] [ansible playbook file]
 ```
+## Demo without Ansbile Role
 e.g  
 Deploy Apache on DEV Hosts  
-```ansible-playbook -i ~/devops/ansible/env/dev/hosts.ini playbook.yml```
+```ansible-playbook -i ~/devops/ansible/env/dev/hosts.ini ~/devops/ansible/demo_without_role/playbook.yml```
 
 Deploy Apache on UAT Hosts  
-```ansible-playbook -i ~/devops/ansible/env/uat/hosts.ini playbook.yml```
+```ansible-playbook -i ~/devops/ansible/env/uat/hosts.ini ~/devops/ansible/demo_without_role/playbook.yml```
 
 Deploy Apache on PROD Hosts  
-```ansible-playbook -i ~/devops/ansible/env/prod/hosts.ini playbook.yml```
+```ansible-playbook -i ~/devops/ansible/env/prod/hosts.ini ~/devops/ansible/demo_without_role/playbook.yml```
+
+## Demo with Ansbile Role
+
+e.g  
+Deploy Apache on DEV Hosts  
+```ansible-playbook -i ~/devops/ansible/env/dev/hosts.ini ~/devops/ansible/demo_with_role/install_apache.yml```
+
+Deploy Apache on UAT Hosts  
+```ansible-playbook -i ~/devops/ansible/env/uat/hosts.ini ~/devops/ansible/demo_with_role/install_apache.yml```
+
+Deploy Apache on PROD Hosts  
+```ansible-playbook -i ~/devops/ansible/env/prod/hosts.ini ~/devops/ansible/demo_with_role/install_apache.yml```
