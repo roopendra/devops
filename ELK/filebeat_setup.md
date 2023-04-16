@@ -80,5 +80,5 @@ sudo /usr/share/logstash/bin/logstash -f  /etc/logstash/conf.d/apache_parse.conf
 ```
 
 #### References 
-https://www.elastic.co/guide/en/logstash/7.17/advanced-pipeline.html
+https://www.elastic.co/guide/en/logstash/7.17/advanced-pipeline.html   
 https://www.elastic.co/guide/en/beats/filebeat/7.17/filebeat-installation-configuration.html
