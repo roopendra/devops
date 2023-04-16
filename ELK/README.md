@@ -93,3 +93,7 @@ Install Kibana
 sudo yum install kibana 
 ```
 ### Please refere [this page](https://github.com/roopendra/devops/blob/master/ELK/filebeat_setup.md) for filebeat setup.
+
+
+Important Link:  
+https://github.com/hpcugent/logstash-patterns/blob/master/files/grok-patterns
