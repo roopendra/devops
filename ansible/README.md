@@ -10,7 +10,6 @@ sudo apt install python3-pip
 pip show boto3
 ```
 
-
 # Install Apache on Ubuntu 22.04
 
 This playbook will install the Apache 2 web server on an Ubuntu 22.04 machine. 
@@ -41,7 +40,6 @@ Quick Steps:
 ```shell
 git clone https://github.com/roopendra/devops.git
 cd devops/ansible
-```
 ```
 
 ### 3. Run the Playbook
