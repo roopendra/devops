@@ -1,0 +1,6 @@
+---
+app_user: "your_user e.g ubuntu"
+http_host: "your_domain e.g. public ip or host"
+http_conf: "httpd.conf"
+http_port: "80"
+disable_default: true

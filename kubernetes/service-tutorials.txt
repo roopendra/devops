@@ -51,3 +51,32 @@ kubectl apply -f example-ingress.yaml
 # Test your ingress
 curl --resolve "hello-world.info:80:$( minikube ip )" -i http://hello-world.info
 curl --resolve "hello-world.info:80:$( minikube ip )" -i http://hello-world.info/v2
+
+
+
+################
+
+
+kind: Service
+apiVersion: v1
+metadata:
+  name: my-service
+spec:
+  selector:
+    app: MyApp
+  ports:
+    - name: http
+      nodePort: 30475
+      port: 8089
+      protocol: TCP
+      targetPort: 8080
+    - name: metrics
+      nodePort: 31261
+      port: 5555
+      protocol: TCP
+      targetPort: 5555
+    - name: health
+      nodePort: 30013
+      port: 8443
+      protocol: TCP
+      targetPort: 8085 
