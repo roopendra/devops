@@ -42,7 +42,7 @@ cd ~ && git clone https://github.com/roopendra/devops.git
 cd ~/devops/ansible
 ```
 
-### 3. Run the Playbook
+### 2. Run the Playbook
 
 ```command
 ansible-playbook -i [inventory file] playbook.yml
