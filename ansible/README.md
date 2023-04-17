@@ -1,4 +1,6 @@
-# Ansible Installation on Ubuntu
+## Ansible Playbook Demo on AWS EC2 instance
+1) Create two aws ec2 ubuntu instances ( 1 master, 2 app-server1 )
+2) Install Ansible on master node 
 ```
 sudo apt update
 sudo apt-add-repository -y ppa:ansible/ansible
@@ -10,43 +12,56 @@ sudo apt install python3-pip
 pip show boto3
 ```
 
-# Install Apache on Ubuntu 22.04
+3) Create ssh key in master node  
+```ssh-keygen -t rsa```
+4) Copy the public key   
+```cat ~/.ssh/id_rsa.pub```
 
-This playbook will install the Apache 2 web server on an Ubuntu 22.04 machine. 
+5) Login in app node and add the key in `~/.ssh/authorized_keys` file  
+- vi `~/.ssh/authorized_keys`  
+- press i ( or insert )  
+- paste the key which you copied in step 4
+- esc :wq!
 
+6) Go to master ec2 instance and ssh app ec2 instance to validate ssh connectivity   
+``ssh <public_ip_of_app_node>```
 
-## Update variable as per your setup in vars/default.yml
-
-- `app_user`: a remote non-root user on the Ansible host that will own the application files. 
-- `http_host`: your domain name.
-- `http_conf`: the name of the configuration file that will be created within Apache.
-- `http_port`: HTTP port, default is 80.
-- `disable_default`: whether or not to disable the default Apache website. When set to true, your new virtualhost should be used as default website. Default is true.
-
-Below values I have used in case of aws ec2 instance
+7) Clone the devops repository for ansible demo : https://github.com/roopendra/devops/tree/master/ansible
 ```
+cd ~ && git clone https://github.com/roopendra/devops.git
+cd ~/devops/ansible/demo_without_role
+```
+
+8) Update the app_user and http_host value in ``~/devops/ansible/demo_without_role/vars/default.yml``
+```
+---
 app_user: "ubuntu"
 http_conf: "httpd.conf"
 http_port: "80"
 disable_default: true
 ```
-
-## Ansible Playbook Demo
-
-
-
-### 1. Get the ansible playbook using git clone
-```shell
-cd ~ && git clone https://github.com/roopendra/devops.git
-cd ~/devops/ansible/demo_without_role
+9) Update the public ipv4 address and DNS name of app node in inventory file ~/devops/ansible/env/dev/hosts.ini     
+```	
+[apache_hosts]
+<IPv4 address> http_host=<IPv4 DNS Address>
+e.g.
+192.168.0.1 http_host="ec2-some-ip-here.eu-north-1.compute.amazonaws.com"
 ```
+10) Run the playbook to install apache on app node   
+```ansible-playbook -i ~/devops/ansible/env/dev/hosts.ini ~/devops/ansible/demo_without_role/playbook.yml```
 
-### 2. Run the Playbook
+
+**For ansible role demo**  
+11) Run below playbook command   
+```ansible-playbook -i ~/devops/ansible/env/dev/hosts.ini ~/devops/ansible/demo_with_role/install_apache.yml```
+
+
+### Ansible Playbook Syntax
 
 ```command
 ansible-playbook -i [inventory file] [ansible playbook file]
 ```
-## Demo without Ansbile Role
+## Ansible command reference
 e.g  
 Deploy Apache on DEV Hosts  
 ```ansible-playbook -i ~/devops/ansible/env/dev/hosts.ini ~/devops/ansible/demo_without_role/playbook.yml```
@@ -57,7 +72,7 @@ Deploy Apache on UAT Hosts
 Deploy Apache on PROD Hosts  
 ```ansible-playbook -i ~/devops/ansible/env/prod/hosts.ini ~/devops/ansible/demo_without_role/playbook.yml```
 
-## Demo with Ansbile Role
+## Ansible role command reference
 
 e.g  
 Deploy Apache on DEV Hosts  
