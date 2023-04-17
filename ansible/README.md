@@ -26,7 +26,6 @@ This playbook will install the Apache 2 web server on an Ubuntu 22.04 machine.
 Below values I have used in case of aws ec2 instance
 ```
 app_user: "ubuntu"
-http_host: "ec2-write-your-ip-here.eu-north-1.compute.amazonaws.com"
 http_conf: "httpd.conf"
 http_port: "80"
 disable_default: true
