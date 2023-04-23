@@ -31,6 +31,5 @@ module "hello" {
   version = "3.1.0"
 
   hello = random_pet.dog.id
-  second_hello = random_pet.dog.id
-	secret_key = "secret"
+  secret_key = "secret"
 }
