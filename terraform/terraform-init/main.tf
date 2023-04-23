@@ -28,8 +28,9 @@ module "nginx-pet" {
 
 module "hello" {
   source  = "joatmon08/hello/random"
-  version = "3.1.0"
+  version = "3.0.1"
 
   hello = random_pet.dog.id
-  secret_key = "secret"
+
+	secret_key = "secret"
 }
