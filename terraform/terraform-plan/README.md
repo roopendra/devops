@@ -171,3 +171,14 @@ Validate if Terraform created the two containers.
 ```
 docker ps
 ```
+
+
+#### Error: Could not retrieve providers for locking
+**Solution** 
+The Terraform command, `providers lock`, can be used to update the lock file
+after consulting the source registries in order to add any new registry supplied
+hashes to the lock file.
+
+```
+terraform providers lock
+```
