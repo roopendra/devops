@@ -1,1 +1,27 @@
 # Bash Scritping Reference
+
+- https://techieroop.com/beginner-shell-scripting-reference/
+- https://techieroop.com/how-to-concatenate-string-variables-in-bash/
+- https://techieroop.com/how-to-check-if-a-string-contains-a-substring-in-bash/
+- https://techieroop.com/how-to-check-if-file-does-not-exist-in-bash/
+- https://techieroop.com/how-to-check-if-a-directory-exists-in-a-bash-script/
+- https://techieroop.com/check-if-array-contains-value-in-shell-script/
+- https://techieroop.com/how-to-get-process-id-of-background-process/
+- https://techieroop.com/loop-through-business-day-and-prev-business-day-in-shell/
+- https://techieroop.com/how-to-split-string-with-a-delimiter-in-shell-script/
+- https://techieroop.com/how-to-validate-date-format-in-shell-script/
+- https://techieroop.com/loop-through-a-date-range-in-shell-script/
+- https://techieroop.com/pass-date-as-mandatory-arguments-in-bash-script/
+- https://techieroop.com/how-to-define-multi-line-string-variable-in-shell/
+- https://techieroop.com/how-to-read-a-config-file-in-python/
+- https://techieroop.com/how-to-run-multiple-bash-scripts-in-parallel/
+- https://techieroop.com/get-the-last-ten-business-days-in-a-unix-shell-script/
+- https://techieroop.com/shell-script-to-pass-multiple-arguments-with-options/
+- https://techieroop.com/how-to-run-a-shell-script-in-infinite-loop/
+- https://techieroop.com/cut-and-paste-in-vim-editor/
+- https://techieroop.com/how-to-run-a-linux-script-during-reboot-or-startup/
+- https://techieroop.com/deleting-lines-containing-specific-string-from-multiple-files/
+- https://techieroop.com/get-the-list-of-all-files-and-directory-recursively-in-linux/
+- https://techieroop.com/rename-all-files-in-the-directory/
+- https://techieroop.com/shell-script-to-run-mysql-query-from-command-line/
+- https://techieroop.com/shell-script-to-start-mysql-server-if-not-running/
